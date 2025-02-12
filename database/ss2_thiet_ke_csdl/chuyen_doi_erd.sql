@@ -1,6 +1,12 @@
 create database if not exists chuyen_doi_erd;
 use chuyen_doi_erd;
 
+create table nha_cung_cap (
+    ma_nha_cung_cap int primary key,
+    ten_nha_cung_cap varchar(50),
+    dia_chi varchar(50)
+);
+
 create table phieu_xuat (
     ma_phieu int primary key,
     ngay_xuat date
@@ -18,13 +24,9 @@ create table phieu_nhap (
 
 create table don_dat_hang (
     ma_don_hang int primary key,
-    ngay_dat_hang date
-);
-
-create table nha_cung_cap (
-    ma_nha_cung_cap int primary key,
-    ten_nha_cung_cap varchar(50),
-    dia_chi varchar(50)
+    ngay_dat_hang date,
+    ma_nha_cung_cap int,
+    foreign key (ma_nha_cung_cap) references nha_cung_cap(ma_nha_cung_cap)
 );
 
 create table so_dien_thoai_nha_cung_cap (
@@ -69,4 +71,3 @@ create table cung_cap (
     foreign key (ma_don_hang) references don_dat_hang(ma_don_hang),
     foreign key (ma_nha_cung_cap) references nha_cung_cap(ma_nha_cung_cap)
 );
-
