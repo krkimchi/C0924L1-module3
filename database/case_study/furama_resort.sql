@@ -211,7 +211,7 @@ select * from nhan_vien where ho_ten like 'H%' or ho_ten like 'T%' or ho_ten lik
 
 -- Câu 3 --
 select * from khach_hang
-where year(curdate()) - year(ngay_sinh) between 18 and 50
+where timestampdiff(year, ngay_sinh, curdate()) between 18 and 50
 and (dia_chi like '%đà nẵng%' or dia_chi like '%quảng trị%');
 
 -- Câu 4 --
