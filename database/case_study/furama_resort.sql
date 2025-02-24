@@ -280,9 +280,12 @@ select distinct ho_ten from khach_hang;
 
 select ho_ten from khach_hang group by ho_ten;
 
-select distinct ho_ten from khach_hang
-union
-select distinct ho_ten from khach_hang;
+select distinct ho_ten 
+from (
+    select ho_ten from khach_hang
+    union all
+    select ho_ten from khach_hang
+) as temp;
 
 -- Câu 9 --
 select month(hd.ngay_lam_hop_dong) as thang, count(distinct hd.ma_khach_hang) as so_luong_khach_hang
