@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Trang Video</title>
+    <link rel="stylesheet" href="css.css">
+</head>
+<body>
+<header>
+    <div class="logo">
+        <span>Phim <span style="color: red; font-style: italic;">Hoạt Hình</span></span>
+    </div>
+    <nav class="head-link">
+        <a href="#">Phim hoạt hình</a> |
+        <a href="#">Phim hoạt hình yêu thích</a> |
+        <a href="#">Nhân vật hoạt hình</a> |
+        <a href="#">Góp ý</a>
+    </nav>
+</header>
+<div class="container">
+    <div class="left-content">
+        <h3>Danh sách video</h3>
+        <div class="video-list">
+            <div class="video-item" onclick="changeVideo('https://www.youtube.com/embed/aQb_6XfE9Ic')">
+                <img src="https://img.youtube.com/vi/aQb_6XfE9Ic/hqdefault.jpg" alt="Video 1">
+                <p>Video 1</p>
+            </div>
+            <div class="video-item" onclick="changeVideo('https://www.youtube.com/embed/gdYQI0ckKXQ')">
+                <img src="https://img.youtube.com/vi/gdYQI0ckKXQ/hqdefault.jpg" alt="Video 2">
+                <p>Video 2</p>
+            </div>
+            <div class="video-item" onclick="changeVideo('https://www.youtube.com/embed/Aoqid4aXxlQ')">
+                <img src="https://img.youtube.com/vi/Aoqid4aXxlQ/hqdefault.jpg" alt="Video 3">
+                <p>Video 3</p>
+            </div>
+        </div>
+    </div>
+    <div class="right-content">
+        <iframe id="videoFrame" src="https://www.youtube.com/embed/PyUl_hGEfE4" allowfullscreen></iframe>
+    </div>
+</div>
+<footer>
+    &copy; 2025 Bản quyền thuộc về chúng tôi
+</footer>
+<script>
+    function changeVideo(url) {
+        const videoFrame = document.getElementById('videoFrame');
+        if (videoFrame.src !== url) {
+            videoFrame.src = url;
+        }
+    }
+</script>
+</body>
+</html>
