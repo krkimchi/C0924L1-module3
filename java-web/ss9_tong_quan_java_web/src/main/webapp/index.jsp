@@ -6,7 +6,7 @@
 </head>
 <body>
 <h2>Product Discount Calculator</h2>
-<form action="display-discount" method="post">
+<form action="abc" method="post">
   <label>Product Description:</label>
   <input type="text" name="description" required><br><br>
 
