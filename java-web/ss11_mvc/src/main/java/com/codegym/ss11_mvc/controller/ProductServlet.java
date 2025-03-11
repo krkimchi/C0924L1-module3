@@ -61,11 +61,11 @@ public class ProductServlet extends HttpServlet {
     private void listProducts(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Product> products = productService.findAll();
         request.setAttribute("products", products);
-        request.getRequestDispatcher("product/list.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/product/list.jsp").forward(request, response);
     }
 
     private void showCreateForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("product/create.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/product/create.jsp").forward(request, response);
     }
 
     private void createProduct(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -82,7 +82,7 @@ public class ProductServlet extends HttpServlet {
             listProducts(request, response);
         } catch (NumberFormatException e) {
             request.setAttribute("error", "Vui lòng nhập số hợp lệ cho giá sản phẩm.");
-            request.getRequestDispatcher("product/create.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/product/create.jsp").forward(request, response);
         }
     }
 
@@ -93,7 +93,7 @@ public class ProductServlet extends HttpServlet {
 
             if (product != null) {
                 request.setAttribute("product", product);
-                request.getRequestDispatcher("product/edit.jsp").forward(request, response);
+                request.getRequestDispatcher("/views/product/edit.jsp").forward(request, response);
             } else {
                 response.sendRedirect("/products");
             }
@@ -117,7 +117,7 @@ public class ProductServlet extends HttpServlet {
             listProducts(request, response);
         } catch (NumberFormatException e) {
             request.setAttribute("error", "Vui lòng nhập số hợp lệ cho ID hoặc giá sản phẩm.");
-            request.getRequestDispatcher("product/edit.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/product/edit.jsp").forward(request, response);
         }
     }
 
@@ -138,7 +138,7 @@ public class ProductServlet extends HttpServlet {
 
             if (product != null) {
                 request.setAttribute("product", product);
-                request.getRequestDispatcher("product/home.jsp").forward(request, response);
+                request.getRequestDispatcher("/views/home.jsp").forward(request, response);
             } else {
                 response.sendRedirect("/products");
             }
@@ -152,6 +152,6 @@ public class ProductServlet extends HttpServlet {
         List<Product> searchResults = productService.findByName(name);
 
         request.setAttribute("products", searchResults);
-        request.getRequestDispatcher("product/list.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/product/list.jsp").forward(request, response);
     }
 }
