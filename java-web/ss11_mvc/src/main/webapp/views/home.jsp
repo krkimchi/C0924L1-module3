@@ -12,12 +12,7 @@
   <title>Chi tiết sản phẩm</title>
 </head>
 <body>
-<h1>Chi tiết sản phẩm</h1>
-<p>ID: ${product.id}</p>
-<p>Tên sản phẩm: ${product.name}</p>
-<p>Giá: ${product.price}</p>
-<p>Mô tả: ${product.description}</p>
-<p>Nhà sản xuất: ${product.manufacturer}</p>
-<a href="/products">Quay lại danh sách sản phẩm</a>
+<h1>Đây là trang home</h1>
+<a href="/products">Quản lý sản phẩm</a>
 </body>
 </html>
