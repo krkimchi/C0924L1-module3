@@ -10,8 +10,8 @@ import javax.servlet.http.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "ProductServlet", urlPatterns = "/products")
-public class ProductServlet extends HttpServlet {
+@WebServlet(name = "ProductController", urlPatterns = "/products")
+public class ProductController extends HttpServlet {
     private final IProductService productService = new ProductService();
 
     @Override
