@@ -20,6 +20,12 @@
   <input type="submit" value="Tìm kiếm">
 </form>
 
+<a href="/products?action=create">Thêm sản phẩm mới</a>
+
+<c:if test="${not empty message}">
+  <p style="color: green">${message}</p>
+</c:if>
+
 <table border="1">
   <tr>
     <th>ID</th>
@@ -39,11 +45,12 @@
       <td>
         <a href="products?action=view&id=${product.id}">Xem</a> |
         <a href="products?action=edit&id=${product.id}">Sửa</a> |
-        <a href="products?action=delete&id=${product.id}">Xoá</a>
+        <a href="products?action=delete&id=${product.id}" onclick="return confirm('Bạn có chắc chắn muốn xoá sản phẩm này?');">Xoá</a>
       </td>
     </tr>
   </c:forEach>
 </table>
 </body>
 </html>
+
 
