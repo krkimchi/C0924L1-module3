@@ -8,4 +8,5 @@ public interface IBookRepository {
     List<Book> getAllBooks();
     Book getBookById(int bookId);
     void updateBookQuantity(int bookId, int newQuantity);
+    boolean checkBookAvailability(int bookId);
 }

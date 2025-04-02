@@ -1,9 +1,12 @@
 package com.codegym.thi_thuc_hanh.service;
 
+import com.codegym.thi_thuc_hanh.dto.BookLoanDto;
 import com.codegym.thi_thuc_hanh.model.Book;
 import com.codegym.thi_thuc_hanh.model.BookLoan;
 import com.codegym.thi_thuc_hanh.repository.BookLoanRepository;
 import com.codegym.thi_thuc_hanh.repository.IBookLoanRepository;
+
+import java.util.List;
 
 public class BookLoanService implements IBookLoanService {
     private IBookLoanRepository bookLoanRepository;
@@ -11,6 +14,7 @@ public class BookLoanService implements IBookLoanService {
 
     public BookLoanService() {
         this.bookLoanRepository = new BookLoanRepository();
+        this.bookService = new BookService();
     }
 
     @Override
@@ -30,11 +34,24 @@ public class BookLoanService implements IBookLoanService {
         BookLoan bookLoan = bookLoanRepository.getBookLoanById(loanId);
         if (bookLoan != null) {
             bookLoanRepository.returnBook(loanId);
+
             Book book = bookService.getBookById(bookLoan.getBookId());
             if (book != null) {
                 int newQuantity = book.getQuantity() + 1;
                 bookService.updateBookQuantity(bookLoan.getBookId(), newQuantity);
             }
+        } else {
+            throw new IllegalArgumentException("Mã mượn sách không hợp lệ.");
         }
+    }
+
+    @Override
+    public List<BookLoanDto> getAllActiveBookLoans() {
+        return bookLoanRepository.getAllActiveBookLoans();
+    }
+
+    @Override
+    public List<BookLoanDto> searchActiveLoans(String bookName, String studentName) {
+        return bookLoanRepository.searchActiveLoans(bookName, studentName);
     }
 }

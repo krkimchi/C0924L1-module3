@@ -14,22 +14,22 @@ public class StudentRepository implements IStudentRepository {
 
     @Override
     public List<Student> getAllStudent() {
+        String sql = "select student_id, full_name, class from students order by full_name";
         List<Student> students = new ArrayList<>();
-        String sql = "select student_id, full_name, class_name from students";
 
-        try (Connection connection = BaseRepository.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-             ResultSet resultSet = preparedStatement.executeQuery()) {
+        try (Connection conn = BaseRepository.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
 
-            while (resultSet.next()) {
-                int studentId = resultSet.getInt("student_id");
-                String fullName = resultSet.getString("full_name");
-                String className = resultSet.getString("class_name");
-                students.add(new Student(studentId, fullName, className));
+            while (rs.next()) {
+                students.add(new Student(
+                        rs.getInt("student_id"),
+                        rs.getString("full_name"),
+                        rs.getString("class")
+                ));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Error fetching students from database", e);
+            throw new RuntimeException("Error fetching students", e);
         }
         return students;
     }

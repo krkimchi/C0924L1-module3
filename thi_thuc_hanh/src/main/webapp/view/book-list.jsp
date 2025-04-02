@@ -18,9 +18,11 @@
         .table th, .table td {
             vertical-align: middle;
         }
+
         .btn-custom {
             margin-top: 5px;
         }
+
         .container {
             margin-top: 20px;
         }
@@ -49,7 +51,8 @@
                 <td>${book.description}</td>
                 <td>${book.quantity}</td>
                 <td>
-                    <a href="/view/borrow.jsp?bookId=${book.bookId}" class="btn btn-primary btn-custom">Mượn Sách</a>
+                    <a href="/borrow?bookId=${book.bookId}" class="btn btn-primary btn-custom">Mượn Sách</a>
+                    <a href="/book-loans" class="btn btn-primary btn-custom">Trả Sách</a>
                 </td>
             </tr>
         </c:forEach>

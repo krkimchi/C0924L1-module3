@@ -1,49 +1,98 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="java.util.Date" %>
-<html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<!DOCTYPE html>
+<html lang="vi">
 <head>
-    <title>Mượn sách</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mượn Sách</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            margin-top: 20px;
+        }
+        .btn-custom {
+            margin-top: 10px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
-    <h2 class="mt-4" style="text-align: center; margin-bottom: 20px">Mượn sách</h2>
-    <c:if test="${not empty error}">
-        <div class="alert alert-danger">${error}</div>
+    <h2 class="text-center">Mượn Sách</h2>
+
+    <c:if test="${not empty errorMessage}">
+        <div class="alert alert-danger">${errorMessage}</div>
     </c:if>
+
     <form method="post" action="/borrow">
-        <input type="hidden" name="bookId" value="${book.bookId}">
-        <div class="mb-3">
-            <label for="borrowId" class="form-label">Mã mượn sách (MS-XXXX):</label>
-            <input type="text" class="form-control" id="borrowId" name="borrowId" required pattern="MS-\d{4}"
-                   placeholder="MS-1234">
+        <div class="form-group">
+            <label for="loanCode">Mã Mượn Sách (MS-XXXX)</label>
+            <input type="text" name="loanCode" class="form-control" id="loanCode" required pattern="MS-\d{4}"
+                   placeholder="Ví dụ: MS-0001">
         </div>
-        <div class="mb-3">
-            <label for="bookTitle" class="form-label">Tên sách:</label>
-            <input type="text" class="form-control" id="bookTitle" value="${book.bookTitle}" readonly>
+
+        <div class="form-group">
+            <label for="bookName">Tên Sách</label>
+            <input type="text" class="form-control" id="bookName" value="${book.bookName}" readonly>
         </div>
-        <div class="mb-3">
-            <label for="studentId" class="form-label">Tên học sinh:</label>
-            <select class="form-select" id="studentId" name="studentId" required>
-                <c:forEach var="student" items="${studentList}">
-                    <option value="${student.studentId}">${student.studentName} - ${student.className}</option>
+
+        <div class="form-group">
+            <label for="studentId">Tên Học Sinh</label>
+            <select name="studentId" class="form-control" id="studentId" required>
+                <option value="">-- Chọn học sinh --</option>
+                <c:forEach var="student" items="${students}">
+                    <option value="${student.studentId}">${student.fullName}</option>
                 </c:forEach>
             </select>
         </div>
-        <div class="mb-3">
-            <label for="borrowDate" class="form-label">Ngày mượn:</label>
-            <input type="text" class="form-control" id="borrowDate"
-                   value="<%= new SimpleDateFormat("dd/MM/yyyy").format(new Date()) %>" readonly>
+
+        <div class="form-group">
+            <label for="loanDate">Ngày Mượn</label>
+            <input type="date" name="loanDate" class="form-control" id="loanDate"
+                   value="<fmt:formatDate value="${currentDate}" pattern="yyyy-MM-dd" />" required>
         </div>
-        <div class="mb-3">
-            <label for="returnDate" class="form-label">Ngày trả:</label>
-            <input type="text" class="form-control" id="returnDate" name="returnDate" required placeholder="dd/MM/yyyy">
+
+        <div class="form-group">
+            <label for="returnDate">Ngày Trả Sách</label>
+            <input type="date" name="returnDate" class="form-control" id="returnDate" required
+                   min="<fmt:formatDate value="${currentDate}" pattern="yyyy-MM-dd" />">
         </div>
-        <button type="submit" class="btn btn-success">Mượn sách</button>
-        <a href="/book" class="btn btn-secondary">Trở về danh sách</a>
+
+        <input type="hidden" name="bookId" value="${book.bookId}">
+
+        <button type="submit" class="btn btn-primary btn-custom">Mượn Sách</button>
+        <a href="/books" class="btn btn-secondary btn-custom">Trở về danh sách</a>
     </form>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    document.querySelector('form').addEventListener('submit', function (event) {
+        const loanDate = document.getElementById('loanDate').value;
+        const returnDate = document.getElementById('returnDate').value;
+
+        if (new Date(returnDate) < new Date(loanDate)) {
+            event.preventDefault();
+            alert("Ngày trả sách không được trước ngày mượn sách!");
+            return false;
+        }
+
+        if (!document.getElementById('studentId').value) {
+            event.preventDefault();
+            alert("Vui lòng chọn học sinh!");
+            return false;
+        }
+
+        return true;
+    });
+</script>
 </body>
 </html>

@@ -53,17 +53,24 @@ public class BorrowBookController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int bookId = Integer.parseInt(req.getParameter("bookId"));
-        Book book = bookService.getBookById(bookId);
-        List<Student> students = studentService.getAllStudents();
+        try {
+            int bookId = Integer.parseInt(req.getParameter("bookId"));
+            Book book = bookService.getBookById(bookId);
 
-        req.setAttribute("book", book);
-        req.setAttribute("students", students);
-        req.setAttribute("currentDate", new java.util.Date());
+            if (book == null) {
+                resp.sendRedirect("/books?error=book_not_found");
+                return;
+            }
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/view/borrow.jsp");
-        dispatcher.forward(req, resp);
+            List<Student> students = studentService.getAllStudents();
+            req.setAttribute("book", book);
+            req.setAttribute("students", students);
+            req.setAttribute("currentDate", new java.sql.Date(System.currentTimeMillis()));
+
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/view/borrow.jsp");
+            dispatcher.forward(req, resp);
+        } catch (NumberFormatException e) {
+            resp.sendRedirect("/books?error=invalid_book_id");
+        }
     }
 }
-
-

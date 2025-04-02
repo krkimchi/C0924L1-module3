@@ -38,14 +38,12 @@ public class BookRepository implements IBookRepository {
 
     @Override
     public Book getBookById(int bookId) {
-        Book book = null;
         String sql = "select * from books where book_id = ?";
-
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, bookId);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    book = new Book(
+                    return new Book(
                             rs.getInt("book_id"),
                             rs.getString("book_name"),
                             rs.getString("author"),
@@ -55,9 +53,9 @@ public class BookRepository implements IBookRepository {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Error getting book by ID", e);
         }
-        return book;
+        return null;
     }
 
     @Override
@@ -71,5 +69,10 @@ public class BookRepository implements IBookRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean checkBookAvailability(int bookId) {
+        return false;
     }
 }
