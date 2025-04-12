@@ -39,64 +39,74 @@
         <input type="hidden" name="action" value="add">
         <input type="hidden" name="currentPage" value="${currentPage}">
         <input type="hidden" name="search" value="${searchQuery}">
-        <div class="form-group">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
+
+        <div class="form-grid">
+            <div class="form-item">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-item">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <div class="form-item">
+                <label for="full_name">Full Name:</label>
+                <input type="text" id="full_name" name="full_name" required>
+            </div>
+            <div class="form-item">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email">
+            </div>
+
+            <div class="form-item">
+                <label for="phone">Phone:</label>
+                <input type="text" id="phone" name="phone">
+            </div>
+            <div class="form-item">
+                <label for="address">Address:</label>
+                <input type="text" id="address" name="address">
+            </div>
+
+            <div class="form-item">
+                <label for="id_card">ID Card:</label>
+                <input type="text" id="id_card" name="id_card">
+            </div>
+            <div class="form-item">
+                <label for="birthday">Birthday:</label>
+                <input type="date" id="birthday" name="birthday">
+            </div>
+
+            <div class="form-item">
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender">
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+
+            <div class="form-item">
+                <label for="customer_type_id">Customer Type:</label>
+                <select id="customer_type_id" name="customer_type_id" required>
+                    <option value="">Select Customer Type</option>
+                    <c:forEach var="type" items="${customerTypes}">
+                        <option value="${type.customerTypeId}">${type.customerTypeName}</option>
+                    </c:forEach>
+                </select>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
+
+        <div style="text-align: center; margin-top: 20px;">
+            <button type="submit"><i class="bx bx-check icon"></i>Confirm Add</button>
         </div>
-        <div class="form-group">
-            <label for="full_name">Full Name:</label>
-            <input type="text" id="full_name" name="full_name" required>
-        </div>
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email">
-        </div>
-        <div class="form-group">
-            <label for="phone">Phone:</label>
-            <input type="text" id="phone" name="phone">
-        </div>
-        <div class="form-group">
-            <label for="address">Address:</label>
-            <input type="text" id="address" name="address">
-        </div>
-        <div class="form-group">
-            <label for="id_card">ID Card:</label>
-            <input type="text" id="id_card" name="id_card">
-        </div>
-        <div class="form-group">
-            <label for="birthday">Birthday:</label>
-            <input type="date" id="birthday" name="birthday">
-        </div>
-        <div class="form-group">
-            <label for="gender">Gender:</label>
-            <select id="gender" name="gender">
-                <option value="">Select Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="customer_type_id">Customer Type:</label>
-            <select id="customer_type_id" name="customer_type_id" required>
-                <option value="">Select Customer Type</option>
-                <c:forEach var="type" items="${customerTypes}">
-                    <option value="${type.customerTypeId}">${type.customerTypeName}</option>
-                </c:forEach>
-            </select>
-        </div>
-        <button type="submit"><i class="bx bx-check icon"></i>Confirm Add</button>
     </form>
 
-    <!-- Hiển thị thông báo lỗi nếu có -->
+
     <c:if test="${not empty error}">
         <div style="color: red; text-align: center; margin: 10px 0;">${error}</div>
     </c:if>
 
-    <!-- Bảng danh sách khách hàng -->
     <table>
         <thead>
         <tr>
@@ -191,7 +201,6 @@
         </tbody>
     </table>
 
-    <!-- Phân trang -->
     <div class="pagination">
         <c:if test="${currentPage > 1}">
             <button onclick="location.href='${pageContext.request.contextPath}/customer?page=${currentPage-1}&search=${searchQuery}'">

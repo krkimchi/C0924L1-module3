@@ -27,15 +27,14 @@ body {
 }
 
 .wrapper {
-    position: relative;
-    width: 430px;
-    height: 800px;
+    width: 90%;
+    max-width: 900px;
     background-color: var(--white-color);
     border-radius: 15px;
-    padding: 120px 32px 64px;
+    padding: 20px;
     border: 1px solid var(--primary-color);
     box-shadow: 0 8px 15px var(--shadow-color);
-    overflow: auto;
+    overflow: hidden;
     transition: var(--transition-3s);
 }
 
@@ -168,4 +167,30 @@ body {
 
 .btn-submit:hover {
     background-color: #08122b;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 20px 40px;
+}
+
+.form-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-item label {
+    font-weight: 500;
+    margin-bottom: 6px;
+}
+
+.form-item input,
+.form-item select {
+    padding: 8px 10px;
+    border: 1px solid var(--input-border-color);
+    border-radius: 5px;
+    font-size: 14px;
+    width: 100%;
 }

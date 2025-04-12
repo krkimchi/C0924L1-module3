@@ -31,7 +31,7 @@ body {
 
 .wrapper {
     width: 90%;
-    max-width: 900px;
+    max-width: 1500px;
     background-color: var(--white-color);
     border-radius: 15px;
     padding: 20px;
@@ -82,12 +82,13 @@ h3 {
 }
 
 table {
-    width: 80%;
-    margin: 0 auto;
+    width: 100%;
+    min-width: 900px;
     border-collapse: collapse;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
 
 th, td {
     padding: 12px;
@@ -126,6 +127,13 @@ td {
 
 .btn-delete:hover {
     background-color: #c82333;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 label {
@@ -200,7 +208,7 @@ button[type="submit"]:hover {
 }
 
 #add-form button[type="submit"] {
-    margin-left: 85px;
+    margin-left: 35px;
 }
 
 .form-grid {
@@ -228,4 +236,3 @@ button[type="submit"]:hover {
     font-size: 14px;
     width: 100%;
 }
-
