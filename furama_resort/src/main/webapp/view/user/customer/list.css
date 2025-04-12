@@ -1,0 +1,211 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
+
+:root {
+    --primary-color: #0D1936;
+    --secondary-color: #535354;
+    --background-color: #EFEFEF;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --white-color: #FFF;
+    --black-color: #000;
+    --input-border-color: #E3E4E6;
+    --transition-3s: 0.3s;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.wrapper {
+    width: 90%;
+    max-width: 900px;
+    background-color: var(--white-color);
+    border-radius: 15px;
+    padding: 20px;
+    border: 1px solid var(--primary-color);
+    box-shadow: 0 8px 15px var(--shadow-color);
+    overflow: hidden;
+    transition: var(--transition-3s);
+}
+
+h2 {
+    text-align: center;
+    margin-top: 20px;
+    color: var(--primary-color);
+}
+
+h3 {
+    margin-left: 60px;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+}
+
+#search {
+    padding: 8px 12px;
+    margin-right: 60px;
+    border-radius: 5px;
+    border: 1px solid var(--input-border-color);
+    font-size: 16px;
+    display: inline-block;
+    height: 35px;
+}
+
+#search-btn {
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    font-size: 20px;
+}
+
+table {
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+}
+
+td {
+    background-color: #fff;
+}
+
+.btn {
+    padding: 6px 12px;
+    font-size: 14px;
+    margin: 5px 0;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+}
+
+.btn-delete:hover {
+    background-color: #c82333;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #28a745;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #218838;
+}
+
+.add-form, .update-form {
+    display: none;
+}
+
+.add-form.active, .update-form.active {
+    display: block;
+}
+
+.actions button {
+    padding: 6px 12px;
+    font-size: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    display: block;
+    width: 100%;
+}
+
+.icon {
+    font-size: 18px;
+    margin-right: 5px;
+}
+
+.actions {
+    position: relative;
+    width: 200px;
+    text-align: center;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination button {
+    padding: 8px 16px;
+    margin: 0 5px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.pagination button:hover {
+    background-color: #0056b3;
+}
+
+#add-btn {
+    margin-left: 65px;
+}
+
+#add-form button[type="submit"] {
+    margin-left: 85px;
+}

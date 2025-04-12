@@ -3,8 +3,7 @@ use furama_resort;
 
 create table rent_type (
     rent_type_id int primary key auto_increment,
-    rent_type_name varchar(45) not null,
-    rent_type_cost double
+    rent_type_name varchar(45) not null
 );
 
 create table service_type (
@@ -24,6 +23,7 @@ create table service (
     description_other_convenience varchar(45),
     pool_area double,
     number_of_floors int,
+    free_service varchar(45), 
     foreign key (rent_type_id) references rent_type(rent_type_id),
     foreign key (service_type_id) references service_type(service_type_id)
 );
@@ -32,7 +32,7 @@ create table attach_service (
     attach_service_id int primary key auto_increment,
     attach_service_name varchar(45) not null,
     attach_service_cost double not null,
-    attach_service_unit int
+    attach_service_unit varchar(45) 
 );
 
 create table education_degree (
@@ -47,12 +47,14 @@ create table employee_position (
 
 create table division (
     division_id int primary key auto_increment,
-    division_name varchar(45) not null
+    division_name varchar(45) not null 
 );
 
 create table user (
     username varchar(255) primary key,
-    password varchar(255) not null
+    password varchar(255) not null,
+    full_name varchar(45),
+    type varchar(20) not null default 'customer'
 );
 
 create table role (
@@ -92,6 +94,7 @@ create table customer_type (
 );
 
 create table customer (
+    username varchar(255),
     customer_id int primary key auto_increment,
     customer_type_id int,
     customer_name varchar(45) not null,
@@ -101,7 +104,8 @@ create table customer (
     customer_phone varchar(45),
     customer_email varchar(45),
     customer_address varchar(45),
-    foreign key (customer_type_id) references customer_type(customer_type_id)
+    foreign key (customer_type_id) references customer_type(customer_type_id),
+    foreign key (username) references user(username)
 );
 
 create table contract (
