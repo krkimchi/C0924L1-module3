@@ -80,11 +80,11 @@ public class CustomerController extends HttpServlet {
             req.setAttribute("totalPages", totalPages);
             req.setAttribute("searchQuery", keyword);
             req.setAttribute("customerTypes", customerService.getAllCustomerTypes());
-            req.getRequestDispatcher("/view/user/customer/list.jsp").forward(req, resp);
+            req.getRequestDispatcher("/view/user/customer/customer.jsp").forward(req, resp);
         } catch (SQLException e) {
             e.printStackTrace();
             req.setAttribute("error", "Error loading customers: " + e.getMessage());
-            req.getRequestDispatcher("/view/user/customer/list.jsp").forward(req, resp);
+            req.getRequestDispatcher("/view/user/customer/customer.jsp").forward(req, resp);
         }
     }
 

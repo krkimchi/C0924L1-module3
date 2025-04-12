@@ -34,10 +34,10 @@ public class LoginController extends HttpServlet {
                 session.setAttribute("user", user);
 
                 String userType = user.getType();
-
+                System.out.println("User type: " + userType);
                 switch (userType) {
                     case "employee":
-                        response.sendRedirect(request.getContextPath() + "/employee");
+                        response.sendRedirect(request.getContextPath() + "/user-management");
                         break;
                     case "customer":
                         response.sendRedirect(request.getContextPath() + "/home");
@@ -49,18 +49,18 @@ public class LoginController extends HttpServlet {
 
             } else {
                 request.setAttribute("errorMessage", "Invalid username or password");
-                request.getRequestDispatcher("/view/user/login/login.jsp").forward(request, response);
+                request.getRequestDispatcher("/view/login/login.jsp").forward(request, response);
             }
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "Login failed: " + e.getMessage());
-            request.getRequestDispatcher("/view/user/login/login.jsp").forward(request, response);
+            request.getRequestDispatcher("/view/login/login.jsp").forward(request, response);
         }
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/view/user/login/login.jsp").forward(req, resp);
+        req.getRequestDispatcher("/view/login/login.jsp").forward(req, resp);
     }
 }
 

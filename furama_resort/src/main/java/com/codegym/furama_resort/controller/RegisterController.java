@@ -23,7 +23,7 @@ public class RegisterController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/view/user/register/register.jsp").forward(req, resp);
+        req.getRequestDispatcher("/view/register/register.jsp").forward(req, resp);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class RegisterController extends HttpServlet {
         try {
             if (userService.usernameExists(username)) {
                 req.setAttribute("error", "Username already exists");
-                req.getRequestDispatcher("/view/user/register/register.jsp").forward(req, resp);
+                req.getRequestDispatcher("/view/register/register.jsp").forward(req, resp);
                 return;
             }
 
@@ -50,7 +50,7 @@ public class RegisterController extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
             req.setAttribute("error", "Registration failed: " + e.getMessage());
-            req.getRequestDispatcher("/view/user/register/register.jsp").forward(req, resp);
+            req.getRequestDispatcher("/view/register/register.jsp").forward(req, resp);
         }
     }
 }

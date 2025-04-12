@@ -1,5 +1,7 @@
 package com.codegym.furama_resort.controller;
 
+import com.codegym.furama_resort.model.User;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,22 +10,22 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet(name = "EmployeeController", value = "/employee")
-public class EmployeeController extends HttpServlet {
+@WebServlet(name = "UserManagementController", value = "/user-management")
+public class UserManagementController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
-        String username = (session != null) ? (String) session.getAttribute("username") : "Guest";
+        User user = (session != null) ? (User) session.getAttribute("user") : null;
 
-        if (username == null || username.equals("Guest")) {
+        if (user == null || !"employee".equalsIgnoreCase(user.getType())) {
             resp.sendRedirect(req.getContextPath() + "/login");
             return;
         }
 
-        req.setAttribute("username", username);
-        req.getRequestDispatcher("/view/user/employee.jsp").forward(req, resp);
+        req.setAttribute("username", user.getUsername());
+        req.getRequestDispatcher("/view/dashboard/dashboard.jsp").forward(req, resp);
     }
 
     @Override
