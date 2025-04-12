@@ -4,6 +4,7 @@ import com.codegym.furama_resort.model.User;
 import com.codegym.furama_resort.util.BaseRepository;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,13 +45,17 @@ public class UserRepository implements IUserRepository {
                 stmt.executeUpdate();
             }
 
-            String insertCustomerSql = "insert into customer (customer_type_id, customer_name, customer_email, customer_phone, username) values (?, ?, ?, ?, ?)";
+            String insertCustomerSql = "insert into customer (username, customer_type_id, customer_name, customer_birthday, customer_gender, customer_id_card, customer_phone, customer_email, customer_address) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             try (PreparedStatement stmt = connection.prepareStatement(insertCustomerSql)) {
-                stmt.setInt(1, customerTypeId);
-                stmt.setString(2, customerName);
-                stmt.setString(3, customerEmail);
-                stmt.setString(4, customerPhone);
-                stmt.setString(5, user.getUsername());
+                stmt.setString(1, user.getUsername());
+                stmt.setInt(2, customerTypeId);
+                stmt.setString(3, customerName);
+                stmt.setDate(4, user.getBirthday() != null ? java.sql.Date.valueOf(user.getBirthday()) : null);
+                stmt.setBoolean(5, "male".equalsIgnoreCase(user.getGender()));
+                stmt.setString(6, user.getIdNumber());
+                stmt.setString(7, customerPhone);
+                stmt.setString(8, customerEmail);
+                stmt.setString(9, user.getAddress());
                 stmt.executeUpdate();
             }
 

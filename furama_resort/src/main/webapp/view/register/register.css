@@ -27,11 +27,12 @@ body {
 }
 
 .wrapper {
-    width: 90%;
-    max-width: 900px;
+    position: relative;
+    width: 730px;
+    height: 650px;
     background-color: var(--white-color);
     border-radius: 15px;
-    padding: 20px;
+    padding: 120px 32px 64px;
     border: 1px solid var(--primary-color);
     box-shadow: 0 8px 15px var(--shadow-color);
     overflow: hidden;
@@ -71,65 +72,31 @@ body {
 }
 
 .register-form {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 85%;
-    transition: var(--transition-3s);
+    position: relative;
+    width: 100%;
 }
 
-.icon {
-    position: absolute;
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
-    font-size: 20px;
-    color: var(--secondary-color);
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 0;
+}
+
+.form-grid .input-box {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
 }
 
 .input-box {
     position: relative;
     display: flex;
     flex-direction: column;
-    margin: 15px 0;
+    margin: 20px 0;
 }
 
-.input-field {
-    width: 100%;
-    height: 55px;
-    font-size: 16px;
-    background: transparent;
-    color: var(--black-color);
-    padding: 0 20px;
-    border: 1px solid var(--input-border-color);
-    border-radius: 30px;
-    outline: none;
-    transition: var(--transition-3s);
-}
-
-.input-field:focus {
-    border: 1px solid var(--primary-color);
-}
-
-.label {
-    position: absolute;
-    top: 50%;
-    left: 20px;
-    transform: translateY(-50%);
-    color: var(--secondary-color);
-    transition: 0.2s;
-    cursor: text;
-}
-
-.input-field:focus ~ .label,
-.input-field:valid ~ .label {
-    top: 0;
-    font-size: 14px;
-    background-color: var(--white-color);
-    color: var(--primary-color);
-    padding: 0 10px;
-}
-
+.input-field,
 .select-field {
     width: 100%;
     height: 55px;
@@ -143,13 +110,51 @@ body {
     transition: var(--transition-3s);
 }
 
-.switch-form {
-    margin-left: 10px;
-    margin-top: 30px;
+.input-field:focus,
+.select-field:focus {
+    border: 1px solid var(--primary-color);
 }
 
-.switch-form a {
+.label {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    color: var(--secondary-color);
+    transition: 0.2s;
+    cursor: text;
+    pointer-events: none;
+    background-color: transparent;
+}
+
+.input-field:focus ~ .label,
+.input-field:not(:placeholder-shown) ~ .label,
+.select-field:focus ~ .label,
+.select-field:valid ~ .label {
+    top: 0;
+    font-size: 14px;
+    background-color: var(--white-color);
     color: var(--primary-color);
+    padding: 0 10px;
+}
+
+input::placeholder,
+select::placeholder {
+    color: transparent;
+}
+
+.icon {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: var(--secondary-color);
+}
+
+input[type="date"] {
+    appearance: none;
+    -webkit-appearance: none;
 }
 
 .btn-submit {
@@ -169,28 +174,12 @@ body {
     background-color: #08122b;
 }
 
-.form-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    padding: 20px 40px;
+.switch-form {
+    margin-top: 50px;
+    text-align: center;
 }
 
-.form-item {
-    display: flex;
-    flex-direction: column;
-}
-
-.form-item label {
-    font-weight: 500;
-    margin-bottom: 6px;
-}
-
-.form-item input,
-.form-item select {
-    padding: 8px 10px;
-    border: 1px solid var(--input-border-color);
-    border-radius: 5px;
-    font-size: 14px;
-    width: 100%;
+.switch-form a {
+    color: var(--primary-color);
+    text-decoration: underline;
 }

@@ -98,10 +98,9 @@
         </div>
 
         <div style="text-align: center; margin-top: 20px;">
-            <button type="submit"><i class="bx bx-check icon"></i>Confirm Add</button>
+            <button type="submit" id="confirm-add-btn"><i class="bx bx-check icon"></i>Confirm Add</button>
         </div>
     </form>
-
 
     <c:if test="${not empty error}">
         <div style="color: red; text-align: center; margin: 10px 0;">${error}</div>
@@ -249,6 +248,10 @@
         document.getElementById("add-form").classList.add("active");
         document.getElementById("add-btn").style.display = "none";
     }
+
+    document.getElementById("add-form").addEventListener("submit", function () {
+        document.getElementById("confirm-add-btn").disabled = true;
+    });
 </script>
 </body>
 </html>

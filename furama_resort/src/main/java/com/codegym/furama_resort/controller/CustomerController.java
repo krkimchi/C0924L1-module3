@@ -45,8 +45,9 @@ public class CustomerController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
-        if (action == null) {
-            action = "list";
+        if (action == null || action.trim().isEmpty()) {
+            listCustomers(req, resp);
+            return;
         }
 
         switch (action) {
@@ -93,19 +94,30 @@ public class CustomerController extends HttpServlet {
             String username = req.getParameter("username");
             String password = req.getParameter("password");
             String fullName = req.getParameter("full_name");
-            String customerName = req.getParameter("full_name");
             String customerEmail = req.getParameter("email");
             String customerPhone = req.getParameter("phone");
             String customerAddress = req.getParameter("address");
             String customerIdCard = req.getParameter("id_card");
             String customerBirthdayStr = req.getParameter("birthday");
             String customerGenderStr = req.getParameter("gender");
-            int customerTypeId = Integer.parseInt(req.getParameter("customer_type_id"));
+            String customerTypeIdStr = req.getParameter("customer_type_id");
             String currentPage = req.getParameter("currentPage");
             String searchQuery = req.getParameter("search");
 
-            if (customerName == null || customerName.trim().isEmpty() || username == null || username.trim().isEmpty()) {
-                req.setAttribute("error", "Customer name and username are required");
+            if (username == null || username.trim().isEmpty() ||
+                    password == null || password.trim().isEmpty() ||
+                    fullName == null || fullName.trim().isEmpty() ||
+                    customerTypeIdStr == null || customerTypeIdStr.trim().isEmpty()) {
+                req.setAttribute("error", "Username, password, full name, and customer type are required");
+                listCustomers(req, resp);
+                return;
+            }
+
+            int customerTypeId;
+            try {
+                customerTypeId = Integer.parseInt(customerTypeIdStr);
+            } catch (NumberFormatException e) {
+                req.setAttribute("error", "Invalid customer type");
                 listCustomers(req, resp);
                 return;
             }
@@ -129,7 +141,7 @@ public class CustomerController extends HttpServlet {
             User user = new User(username, password, fullName, "customer");
             Customer customer = new Customer();
             customer.setCustomerTypeId(customerTypeId);
-            customer.setCustomerName(customerName);
+            customer.setCustomerName(fullName);
             customer.setCustomerEmail(customerEmail);
             customer.setCustomerPhone(customerPhone);
             customer.setCustomerAddress(customerAddress);

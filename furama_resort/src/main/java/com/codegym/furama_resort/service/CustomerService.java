@@ -7,7 +7,9 @@ import com.codegym.furama_resort.repository.CustomerRepository;
 import com.codegym.furama_resort.repository.CustomerTypeRepository;
 import com.codegym.furama_resort.repository.ICustomerRepository;
 import com.codegym.furama_resort.repository.ICustomerTypeRepository;
+import com.codegym.furama_resort.util.BaseRepository;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -18,13 +20,28 @@ public class CustomerService implements ICustomerService {
 
     @Override
     public void saveCustomer(Customer customer, User user) throws SQLException {
-        if (userService.usernameExists(user.getUsername())) {
-            throw new SQLException("Username already exists");
-        }
+        System.out.println("Saving customer with username: " + user.getUsername());
+        Connection connection = BaseRepository.getConnectDB();
+        try {
+            connection.setAutoCommit(false);
 
-        user.setType("customer");
-        userService.registerCustomer(user, customer.getCustomerName(), customer.getCustomerEmail(), customer.getCustomerPhone(), customer.getCustomerTypeId());
-        customerRepository.saveCustomer(customer);
+            if (userService.usernameExists(user.getUsername())) {
+                throw new SQLException("Username already exists");
+            }
+
+            user.setType("customer");
+            userService.registerCustomer(user, customer.getCustomerName(), customer.getCustomerEmail(), customer.getCustomerPhone(), customer.getCustomerTypeId());
+
+            customerRepository.saveCustomer(customer);
+
+            connection.commit();
+        } catch (SQLException e) {
+            connection.rollback();
+            throw e;
+        } finally {
+            connection.setAutoCommit(true);
+            connection.close();
+        }
     }
 
     @Override

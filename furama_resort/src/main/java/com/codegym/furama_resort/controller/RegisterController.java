@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 @WebServlet(name = "RegisterController", value = "/register")
 public class RegisterController extends HttpServlet {
@@ -30,10 +32,54 @@ public class RegisterController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
-        String fullName = req.getParameter("fullName");
-        String customerEmail = req.getParameter("customerEmail");
-        String customerPhone = req.getParameter("customerPhone");
+        String confirmPassword = req.getParameter("confirm_password");
+        String fullName = req.getParameter("full_name");
+        String birthdayStr = req.getParameter("birthday");
+        String gender = req.getParameter("gender");
+        String idNumber = req.getParameter("id_number");
+        String phone = req.getParameter("phone");
+        String email = req.getParameter("email");
+        String address = req.getParameter("address");
         int customerTypeId = 5;
+
+        if (!password.equals(confirmPassword)) {
+            req.setAttribute("error", "Passwords do not match");
+            req.getRequestDispatcher("/view/register/register.jsp").forward(req, resp);
+            return;
+        }
+
+        if (username == null || username.trim().isEmpty() ||
+                fullName == null || fullName.trim().isEmpty() ||
+                birthdayStr == null || birthdayStr.trim().isEmpty() ||
+                gender == null || gender.trim().isEmpty() ||
+                idNumber == null || idNumber.trim().isEmpty() ||
+                phone == null || phone.trim().isEmpty() ||
+                email == null || email.trim().isEmpty() ||
+                address == null || address.trim().isEmpty()) {
+            req.setAttribute("error", "All fields are required");
+            req.getRequestDispatcher("/view/register/register.jsp").forward(req, resp);
+            return;
+        }
+
+        LocalDate birthday;
+        try {
+            birthday = LocalDate.parse(birthdayStr);
+            if (birthday.isAfter(LocalDate.now())) {
+                req.setAttribute("error", "Birthday cannot be in the future");
+                req.getRequestDispatcher("/view/register/register.jsp").forward(req, resp);
+                return;
+            }
+        } catch (DateTimeParseException e) {
+            req.setAttribute("error", "Invalid birthday format");
+            req.getRequestDispatcher("/view/register/register.jsp").forward(req, resp);
+            return;
+        }
+
+        if (!gender.equals("male") && !gender.equals("female")) {
+            req.setAttribute("error", "Invalid gender selection");
+            req.getRequestDispatcher("/view/register/register.jsp").forward(req, resp);
+            return;
+        }
 
         try {
             if (userService.usernameExists(username)) {
@@ -42,11 +88,11 @@ public class RegisterController extends HttpServlet {
                 return;
             }
 
-            User user = new User(username, password, fullName, "customer");
-            userService.registerCustomer(user, fullName, customerEmail, customerPhone, customerTypeId);
+            User user = new User(username, password, fullName, "customer", birthday, gender, idNumber, phone, email, address);
+            userService.registerCustomer(user, fullName, email, phone, customerTypeId);
 
             req.setAttribute("success", "Registration successful! Please login.");
-            req.getRequestDispatcher("/view/user/login.jsp").forward(req, resp);
+            req.getRequestDispatcher("/view/login/login.jsp").forward(req, resp);
         } catch (SQLException e) {
             e.printStackTrace();
             req.setAttribute("error", "Registration failed: " + e.getMessage());
