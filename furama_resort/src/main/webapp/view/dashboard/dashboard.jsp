@@ -99,7 +99,7 @@
     </style>
 </head>
 <body>
-<!-- Header -->
+
 <div class="header">
     <div class="logo">Logo</div>
     <div class="username">${username}</div> <!-- Lấy username từ Servlet -->
@@ -108,9 +108,9 @@
 <!-- Navigation Bar -->
 <div class="navbar">
     <div class="nav-links">
-        <a href="#">Home</a>
-        <a href="#">Employee</a>
-        <a href="#">Customer</a>
+        <a href="/home">Home</a>
+        <a href="/employee">Employee</a>
+        <a href="/customer">Customer</a>
         <a href="#">Service</a>
         <a href="#">Contract</a>
     </div>
