@@ -111,7 +111,7 @@
         <a href="/home">Home</a>
         <a href="/employee">Employee</a>
         <a href="/customer">Customer</a>
-        <a href="#">Service</a>
+        <a href="/service">Service</a>
         <a href="#">Contract</a>
     </div>
     <div class="search-bar">
