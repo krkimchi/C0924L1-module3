@@ -5,6 +5,7 @@ import com.codegym.furama_resort.repository.IServiceRepository;
 import com.codegym.furama_resort.repository.ServiceRepository;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class ServiceService implements IServiceService {
     private final IServiceRepository serviceRepository;
@@ -17,4 +18,10 @@ public class ServiceService implements IServiceService {
     public void addService(Service service) throws SQLException {
         serviceRepository.addService(service);
     }
+
+    @Override
+    public List<Service> findAll() throws SQLException {
+        return serviceRepository.findAll();
+    }
+
 }
