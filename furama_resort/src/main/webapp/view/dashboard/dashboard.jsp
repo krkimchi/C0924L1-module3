@@ -1,141 +1,57 @@
 <%--
   Created by IntelliJ IDEA.
   User: Owner
-  Date: 4/11/2025
-  Time: 12:45 PM
+  Date: 4/17/2025
+  Time: 10:00 AM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee Page</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            border-bottom: 1px solid #000;
-        }
-
-        .logo {
-            width: 50px;
-            height: 50px;
-            border: 1px solid #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .username {
-            font-size: 16px;
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px;
-            border-bottom: 1px solid #000;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 20px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #000;
-        }
-
-        .search-bar input {
-            padding: 5px;
-            width: 200px;
-            border: 1px solid #000;
-            border-radius: 15px;
-        }
-
-        .main {
-            display: flex;
-            min-height: 400px;
-        }
-
-        .sidebar {
-            width: 200px;
-            border-right: 1px solid #000;
-            padding: 10px;
-        }
-
-        .sidebar ul {
-            list-style: none;
-        }
-
-        .sidebar ul li {
-            margin: 10px 0;
-        }
-
-        .content {
-            flex-grow: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .footer {
-            padding: 10px;
-            text-align: center;
-            border-top: 1px solid #000;
-        }
-    </style>
+    <title>Furama Resort - Dashboard</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="view/dashboard/dashboard.css">
 </head>
 <body>
 
-<div class="header">
-    <div class="logo">Logo</div>
-    <div class="username">${username}</div> <!-- Lấy username từ Servlet -->
+<div class="main-content">
+    <div class="navbar">
+        <div class="logo-container">
+            <img src="resources/images/logo.png" alt="Furama Resort" class="logo">
+            <span class="hotel-name">Furama Resort</span>
+        </div>
+        <nav>
+            <ul>
+                <li><i class='bx bx-home'></i> <a href="/home" class="nav-link">Home</a></li>
+                <li><i class='bx bx-user'></i> <a href="/employee" class="nav-link">Employee</a></li>
+                <li><i class='bx bx-group'></i> <a href="/customer" class="nav-link">Customer</a></li>
+                <li><i class='bx bx-briefcase'></i> <a href="/service" class="nav-link">Service</a></li>
+                <li><i class='bx bx-file'></i> <a href="#contract" class="nav-link">Contract</a></li>
+            </ul>
+        </nav>
+        <div class="auth-buttons">
+            <input type="text" class="booking-input" placeholder="Search...">
+            <span class="username">${sessionScope.user.username}</span>
+            <button class="auth-btn">Logout</button>
+        </div>
+    </div>
 </div>
 
-<!-- Navigation Bar -->
-<div class="navbar">
-    <div class="nav-links">
-        <a href="/home">Home</a>
-        <a href="/employee">Employee</a>
-        <a href="/customer">Customer</a>
-        <a href="/service">Service</a>
-        <a href="#">Contract</a>
-    </div>
-    <div class="search-bar">
-        <input type="text" placeholder="search">
-    </div>
-</div>
-
-<!-- Main Content -->
-<div class="main">
-    <div class="sidebar">
+<div class="content-wrapper">
+    <aside class="sidebar">
         <ul>
             <li>Item One</li>
             <li>Item Two</li>
             <li>Item Three</li>
         </ul>
-    </div>
-    <div class="content">
-        <p>Body...</p>
-    </div>
+    </aside>
+
+    <main class="main-section">
+    </main>
 </div>
 
-<!-- Footer -->
-<div class="footer">
-    <p>Footer...</p>
-</div>
 </body>
 </html>

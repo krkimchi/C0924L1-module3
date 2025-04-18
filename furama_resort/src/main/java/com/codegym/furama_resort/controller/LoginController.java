@@ -37,7 +37,7 @@ public class LoginController extends HttpServlet {
                 System.out.println("User type: " + userType);
                 switch (userType) {
                     case "employee":
-                        response.sendRedirect(request.getContextPath() + "/user-management");
+                        response.sendRedirect(request.getContextPath() + "/dashboard");
                         break;
                     case "customer":
                         response.sendRedirect(request.getContextPath() + "/home");
