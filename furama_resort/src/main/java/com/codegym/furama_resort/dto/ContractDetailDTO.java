@@ -1,15 +1,13 @@
-package com.codegym.furama_resort.model;
+package com.codegym.furama_resort.dto;
 
-public class ContractDetail {
+public class ContractDetailDTO {
     private int contractDetailId;
     private int contractId;
     private int attachServiceId;
-    private int quantity;
     private String attachServiceName;
+    private int quantity;
 
-    public ContractDetail() {
-
-    }
+    public ContractDetailDTO() {}
 
     public int getContractDetailId() {
         return contractDetailId;
@@ -35,19 +33,19 @@ public class ContractDetail {
         this.attachServiceId = attachServiceId;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
     public String getAttachServiceName() {
         return attachServiceName;
     }
 
     public void setAttachServiceName(String attachServiceName) {
         this.attachServiceName = attachServiceName;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

@@ -129,9 +129,8 @@ public class ServiceController extends HttpServlet {
                 service.setFreeService(freeService);
 
                 serviceService.addService(service);
-
-                req.setAttribute("success", "Service added successfully!");
-                forwardWithRentTypes(req, resp);
+                req.getSession().setAttribute("success", "Service added successfully!");
+                resp.sendRedirect(req.getContextPath() + "/service");
             } catch (NumberFormatException e) {
                 req.setAttribute("error", "Invalid number format in input fields");
                 forwardWithRentTypes(req, resp);

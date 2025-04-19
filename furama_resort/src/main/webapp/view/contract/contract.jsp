@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Owner
-  Date: 4/17/2025
-  Time: 10:00 AM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
@@ -12,6 +5,7 @@
     <title>Add New Contract</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="view/contract/contract.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 <body>
 <div class="wrapper">
@@ -33,19 +27,23 @@
         <div class="form-grid">
             <div class="form-item">
                 <label for="contract_start_date">Start Date:</label>
-                <input type="datetime-local" id="contract_start_date" name="contract_start_date" required>
+                <input type="text" id="contract_start_date" name="contract_start_date"
+                       class="datepicker" required>
             </div>
             <div class="form-item">
                 <label for="contract_end_date">End Date:</label>
-                <input type="datetime-local" id="contract_end_date" name="contract_end_date" required>
+                <input type="text" id="contract_end_date" name="contract_end_date"
+                       class="datepicker" required>
             </div>
             <div class="form-item">
                 <label for="contract_deposit">Deposit:</label>
-                <input type="number" id="contract_deposit" name="contract_deposit" step="0.01" min="0">
+                <input type="number" id="contract_deposit" name="contract_deposit"
+                       step="0.01" min="0" required>
             </div>
             <div class="form-item">
                 <label for="contract_total_money">Total Money:</label>
-                <input type="number" id="contract_total_money" name="contract_total_money" step="0.01" min="0">
+                <input type="number" id="contract_total_money" name="contract_total_money"
+                       step="0.01" min="0" required>
             </div>
             <div class="form-item">
                 <label for="employee_id">Employee:</label>
@@ -81,5 +79,14 @@
         </div>
     </form>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+    flatpickr(".datepicker", {
+        enableTime: true,
+        dateFormat: "d/m/Y H:i",
+        allowInput: true
+    });
+</script>
 </body>
 </html>

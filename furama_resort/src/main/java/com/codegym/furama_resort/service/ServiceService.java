@@ -24,4 +24,18 @@ public class ServiceService implements IServiceService {
         return serviceRepository.findAll();
     }
 
+    @Override
+    public Service findById(int serviceId) throws SQLException {
+        return serviceRepository.findById(serviceId);
+    }
+
+    @Override
+    public void updateService(Service service) throws SQLException {
+        serviceRepository.updateService(service);
+    }
+
+    @Override
+    public void deleteService(int serviceId) throws SQLException {
+        serviceRepository.deleteService(serviceId);
+    }
 }

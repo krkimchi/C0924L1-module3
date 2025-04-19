@@ -7,5 +7,12 @@ import java.util.List;
 
 public interface IServiceRepository {
     void addService(Service service) throws SQLException;
+
     List<Service> findAll() throws SQLException;
+
+    Service findById(int id) throws SQLException;
+
+    void updateService(Service service) throws SQLException;
+
+    void deleteService(int serviceIdd) throws SQLException;
 }

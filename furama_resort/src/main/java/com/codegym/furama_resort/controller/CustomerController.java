@@ -25,6 +25,18 @@ public class CustomerController extends HttpServlet {
         customerService = new CustomerService();
     }
 
+    private boolean isValidPhone(String phone) {
+        return phone != null && phone.matches("^(090|091|\\(84\\)\\+90|\\(84\\)\\+91)\\d{7}$");
+    }
+
+    private boolean isValidIdCard(String idCard) {
+        return idCard != null && idCard.matches("^\\d{9}(\\d{3})?$");
+    }
+
+    private boolean isValidCustomerCode(String username) {
+        return username != null && username.matches("^KH-\\d{4}$");
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
@@ -113,6 +125,24 @@ public class CustomerController extends HttpServlet {
                 return;
             }
 
+            if (!isValidCustomerCode(username)) {
+                req.setAttribute("error", "Invalid username. Must follow format KH-XXXX (e.g., KH-0001)");
+                listCustomers(req, resp);
+                return;
+            }
+
+            if (!isValidPhone(customerPhone)) {
+                req.setAttribute("error", "Invalid phone format. Must be 090xxxxxxx, 091xxxxxxx, (84)+90xxxxxxx or (84)+91xxxxxxx");
+                listCustomers(req, resp);
+                return;
+            }
+
+            if (!isValidIdCard(customerIdCard)) {
+                req.setAttribute("error", "Invalid ID Card format. Must be 9 or 12 digits");
+                listCustomers(req, resp);
+                return;
+            }
+
             int customerTypeId;
             try {
                 customerTypeId = Integer.parseInt(customerTypeIdStr);
@@ -175,6 +205,18 @@ public class CustomerController extends HttpServlet {
 
             if (customerName == null || customerName.trim().isEmpty()) {
                 req.setAttribute("error", "Customer name is required");
+                listCustomers(req, resp);
+                return;
+            }
+
+            if (!isValidPhone(customerPhone)) {
+                req.setAttribute("error", "Invalid phone format. Must be 090xxxxxxx, 091xxxxxxx, (84)+90xxxxxxx or (84)+91xxxxxxx");
+                listCustomers(req, resp);
+                return;
+            }
+
+            if (!isValidIdCard(customerIdCard)) {
+                req.setAttribute("error", "Invalid ID Card format. Must be 9 or 12 digits");
                 listCustomers(req, resp);
                 return;
             }

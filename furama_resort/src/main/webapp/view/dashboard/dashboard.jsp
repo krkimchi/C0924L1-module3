@@ -29,7 +29,7 @@
                 <li><i class='bx bx-user'></i> <a href="/employee" class="nav-link">Employee</a></li>
                 <li><i class='bx bx-group'></i> <a href="/customer" class="nav-link">Customer</a></li>
                 <li><i class='bx bx-briefcase'></i> <a href="/service" class="nav-link">Service</a></li>
-                <li><i class='bx bx-file'></i> <a href="#contract" class="nav-link">Contract</a></li>
+                <li><i class='bx bx-file'></i> <a href="/contract" class="nav-link">Contract</a></li>
             </ul>
         </nav>
         <div class="auth-buttons">
